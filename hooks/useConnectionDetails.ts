@@ -13,20 +13,25 @@ export default function useConnectionDetails() {
 
   const [connectionDetails, setConnectionDetails] = useState<ConnectionDetails | null>(null);
 
-  const fetchConnectionDetails = useCallback(() => {
+  const fetchConnectionDetails = useCallback(async (interests: string = '') => {
     setConnectionDetails(null);
     const url = new URL(
       process.env.NEXT_PUBLIC_CONN_DETAILS_ENDPOINT ?? '/api/connection-details',
       window.location.origin
     );
-    fetch(url.toString())
-      .then((res) => res.json())
-      .then((data) => {
-        setConnectionDetails(data);
-      })
-      .catch((error) => {
-        console.error('Error fetching connection details:', error);
+    try {
+      const res = await fetch(url.toString(), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ interests }),
       });
+      const data = await res.json();
+      setConnectionDetails(data);
+    } catch (error) {
+      console.error('Error fetching connection details:', error);
+    }
   }, []);
 
   useEffect(() => {

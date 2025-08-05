@@ -1,9 +1,13 @@
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+
+// Assuming you have a Textarea component in your ui folder
 
 interface WelcomeProps {
   disabled: boolean;
   startButtonText: string;
-  onStartCall: () => void;
+  onStartCall: (interests: string) => void;
 }
 
 export const Welcome = ({
@@ -12,6 +16,7 @@ export const Welcome = ({
   onStartCall,
   ref,
 }: React.ComponentProps<'div'> & WelcomeProps) => {
+  const [interests, setInterests] = useState('');
   return (
     <div
       ref={ref}
@@ -33,23 +38,25 @@ export const Welcome = ({
       </svg>
 
       <p className="text-fg1 max-w-prose pt-1 leading-6 font-medium">
-        Chat live with your voice AI agent
+        Chat live with your AI Tutor
       </p>
-      <Button variant="primary" size="lg" onClick={onStartCall} className="mt-6 w-64 font-mono">
+      <div className="mt-4 w-64">
+        <Input
+          type="text"
+          placeholder="Type interests (e.g., 'coding, AI, space')"
+          value={interests}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInterests(e.target.value)}
+          className="mb-4"
+        />
+      </div>
+      <Button
+        variant="primary"
+        size="lg"
+        onClick={() => onStartCall(interests)}
+        className="mt-6 w-64 font-mono"
+      >
         {startButtonText}
       </Button>
-      <p className="text-fg1 m fixed bottom-5 left-1/2 w-full max-w-prose -translate-x-1/2 pt-1 text-xs leading-5 font-normal text-pretty md:text-sm">
-        Need help getting set up? Check out the{' '}
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://docs.livekit.io/agents/start/voice-ai/"
-          className="underline"
-        >
-          Voice AI quickstart
-        </a>
-        .
-      </p>
     </div>
   );
 };

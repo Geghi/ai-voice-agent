@@ -59,7 +59,7 @@ export const SessionView = ({
             description: (
               <p className="w-full">
                 {reason}
-                <a
+                {/* <a
                   target="_blank"
                   rel="noopener noreferrer"
                   href="https://docs.livekit.io/agents/start/voice-ai/"
@@ -67,7 +67,7 @@ export const SessionView = ({
                 >
                   See quickstart guide
                 </a>
-                .
+                . */}
               </p>
             ),
           });
