@@ -13,7 +13,7 @@ export default function useConnectionDetails() {
 
   const [connectionDetails, setConnectionDetails] = useState<ConnectionDetails | null>(null);
 
-  const fetchConnectionDetails = useCallback(async (interests: string = '') => {
+  const fetchConnectionDetails = useCallback(async (language: string = 'EN') => {
     setConnectionDetails(null);
     const url = new URL(
       process.env.NEXT_PUBLIC_CONN_DETAILS_ENDPOINT ?? '/api/connection-details',
@@ -25,7 +25,7 @@ export default function useConnectionDetails() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ interests }),
+        body: JSON.stringify({ language }),
       });
       const data = await res.json();
       setConnectionDetails(data);

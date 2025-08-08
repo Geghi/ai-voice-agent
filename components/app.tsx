@@ -79,9 +79,9 @@ export function App({ appConfig }: AppProps) {
       <MotionWelcome
         key="welcome"
         startButtonText={startButtonText}
-        onStartCall={(interests) => {
+        onStartCall={(language) => {
           setSessionStarted(true);
-          refreshConnectionDetails(interests);
+          refreshConnectionDetails(language);
         }}
         disabled={sessionStarted}
         initial={{ opacity: 0 }}
