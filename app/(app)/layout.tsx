@@ -11,9 +11,9 @@ export default async function AppLayout({ children }: AppLayoutProps) {
 
   return (
     <>
-      <header className="fixed top-0 left-0 z-50 hidden w-full flex-row justify-between p-6 md:flex">
+      <header className="fixed top-0 left-0 z-50 hidden w-full flex-row justify-between bg-white/5 p-6 backdrop-blur-sm md:flex">
         <span className="text-foreground font-mono text-xs font-bold tracking-wider uppercase">
-          AI TUTOR{' '}
+          Let&apos;s Chat{' '}
         </span>
         <span className="text-foreground font-mono text-xs font-bold tracking-wider uppercase">
           Made By{' '}
@@ -27,6 +27,7 @@ export default async function AppLayout({ children }: AppLayoutProps) {
           </a>
         </span>
       </header>
+      <div className="pointer-events-none fixed inset-0 z-0 bg-gradient-to-br from-black/40 to-black/60"></div>
       {children}
     </>
   );

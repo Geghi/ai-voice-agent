@@ -28,18 +28,19 @@ export async function POST(request: Request) {
       throw new Error('LIVEKIT_API_SECRET is not defined');
     }
 
-    const { interests } = await request.json();
+    const { language } = await request.json();
 
     // Generate participant token
     const participantName = 'user';
     const participantIdentity = `voice_assistant_user_${Math.floor(Math.random() * 10_000)}`;
     const roomName = `voice_assistant_room_${Math.floor(Math.random() * 10_000)}`;
-    console.log(`Creating participant interests: ${interests}`);
+    console.log(`Creating participant language: ${language}`);
+
     const participantToken = await createParticipantToken(
       {
         identity: participantIdentity,
         name: participantName,
-        metadata: JSON.stringify({ interests: interests }),
+        metadata: JSON.stringify({ language: language }),
       },
       roomName
     );
